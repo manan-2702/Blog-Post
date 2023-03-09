@@ -61,7 +61,11 @@ mongoose
     "mongodb+srv://Manan:Manan%402002@cluster0.dzl75c3.mongodb.net/messages?retryWrites=true"
   )
   .then((result) => {
-    app.listen(8080);
+    const server = app.listen(8080);
+    const io = require("./socket").init(server);
+    io.on("connection", (socket) => {
+      console.log("Client Connected");
+    });
   })
   .catch((err) => {
     console.log(err);

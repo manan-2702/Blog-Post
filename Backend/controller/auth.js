@@ -87,7 +87,7 @@ exports.getUserStatus = async (req, res, next) => {
 exports.patchUpdateStatus = async (req, res, next) => {
   try {
     const newStatus = req.body.status;
-    const user = User.findById(req.userId);
+    const user = await User.findById(req.userId);
     if (!user) {
       const error = new Error("User not found");
       error.statusCode = 404;
